@@ -1,0 +1,26 @@
+{
+  "name": "chatchallenge",
+  "version": "1.0.0",
+  "description": "jobsity real code challenge, create a simple chat",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JudasII/jobsitychallenge.git"
+  },
+  "keywords": [
+    "challenge"
+  ],
+  "author": "Juan David Alvarez (judasII)",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JudasII/jobsitychallenge/issues"
+  },
+  "homepage": "https://github.com/JudasII/jobsitychallenge#readme"
+}
