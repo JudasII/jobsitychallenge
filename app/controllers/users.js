@@ -1,13 +1,14 @@
-const users = require('../../models/users'),
+const { Users } = require('../../models'),
   errors = require('../errors'),
   bcrypt = require('bcrypt'),
   jwt = require('jsonwebtoken'),
   secret = 'notasecrekey';
 
+ 
 exports.createUser = (req, res, next) =>
-  users.createWithHashedPassword(req.query)
+  Users.createWithHashedPassword(req.query)
     .then(user => res.status(201).send(user))
-    .catch(error => res.status(404).send(error.message));
+    .catch(next);
 
 exports.getUsers = (req, res, next) =>
   Users.getAll(req.query)

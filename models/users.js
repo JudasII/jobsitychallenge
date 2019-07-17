@@ -1,5 +1,6 @@
 'use strict';
 const bcrypt = require('bcrypt'),
+    { chatRoom } = require('./chatroom')
 saltRounds=10;
 
 module.exports = (sequelize, DataTypes) => {
@@ -37,7 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   }, {});
   
-  User.createWithHashedPassword = user => {
+  Users.createWithHashedPassword = user => {
     const hashedPassword = bcrypt.hashSync(user.password, saltRounds);
     return User.create({ ...user, password: hashedPassword })
       .then(userCreated => {
@@ -50,16 +51,16 @@ module.exports = (sequelize, DataTypes) => {
       });
   };
 
-  User.getAll = data =>
-    User.findAll()
+  Users.getAll = () =>
+    Users.findAll()
       .then(users => users)
       .catch(err => {
         console.log('Database error has occurred');
         throw databaseError(err);
       });
 
-  User.findUser = data =>
-    User.findOne({
+  Users.findUser = data =>
+    Users.findOne({
       where: { email: data.email }
     })
       .then(user => user)
@@ -68,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
         throw databaseError(err);
       });
   Users.associate = function(models) {
-    // associations can be defined here
+    Users.belongsToMany( chatRoom, {through: 'commonInterests'})
   };
   return Users;
 };
