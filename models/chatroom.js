@@ -25,22 +25,22 @@ module.exports = (sequelize, DataTypes) => {
     const hashedPassword = bcrypt.hashSync(room.password, saltRounds);
     return chatRoom.create({ ...room, password: hashedPassword })
       .then(newRoom => {
-        logger.info(`The new room "${newRoom.email}" was created successfully`);
+        console.log(`The new room "${newRoom.email}" was created successfully`);
         return newRoom;
       })
       .catch(err => {
-        logger.error('Database error has occurred');
+        console.log('Database error has occurred');
         throw databaseError(err);
       });
   };
   chatRoom.createPublic = room => {
     return chatRoom.create({ room })
       .then(newRoom => {
-        logger.info(`The new room "${newRoom.email}" was created successfully`);
+        console.log(`The new room "${newRoom.email}" was created successfully`);
         return newRoom;
       })
       .catch(err => {
-        logger.error('Database error has occurred');
+        console.log('Database error has occurred');
         throw databaseError(err);
       });
   };
@@ -61,7 +61,7 @@ chatRoom.findRoom = data =>
       comsole.log('Database error has occurred');
       throw databaseError(err);
     });
-    
+
 chatRoom.insertUser = data =>chatRoom.create({data});
 
 chatRoom.associate = function(models) {
