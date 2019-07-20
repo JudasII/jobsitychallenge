@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     },
     private: {
-      allowNull: true,
+      allowNull: false,
       type: DataTypes.BOOLEAN
     },    
     password: {
@@ -21,11 +21,12 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING
     }
   }, {});
+
   chatRoom.createWithHashedPassword = room => {
     const hashedPassword = bcrypt.hashSync(room.password, saltRounds);
     return chatRoom.create({ ...room, password: hashedPassword })
       .then(newRoom => {
-        console.log(`The new room "${newRoom.email}" was created successfully`);
+        console.log(`The new room "${newRoom.room}" was created successfully`);
         return newRoom;
       })
       .catch(err => {
@@ -36,7 +37,7 @@ module.exports = (sequelize, DataTypes) => {
   chatRoom.createPublic = room => {
     return chatRoom.create({ room })
       .then(newRoom => {
-        console.log(`The new room "${newRoom.email}" was created successfully`);
+        console.log(`The new room "${newRoom.theme}" was created successfully`);
         return newRoom;
       })
       .catch(err => {
